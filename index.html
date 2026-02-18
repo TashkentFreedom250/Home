@@ -13,13 +13,22 @@
             .progress-container {
                 background-color: rgba(255, 255, 255, 0.1);
                 border-radius: 4px;
-                height: 8px;
+                height: 12px; /* Slightly thicker */
                 width: 100%;
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
                 overflow: hidden;
+                position: relative;
             }
             .progress-bar { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
             
+            /* Percent Labels */
+            .percent-label {
+                float: right;
+                font-size: 0.9rem;
+                font-weight: bold;
+                color: #ffffff;
+            }
+
             /* Status Colors */
             .bg-green { background-color: #28a745; }
             .bg-yellow { background-color: #ffc107; }
@@ -29,7 +38,7 @@
             /* Badges */
             .status-badge {
                 display: inline-block;
-                padding: 0.2rem 0.6rem;
+                padding: 0.1rem 0.5rem;
                 border-radius: 4px;
                 font-size: 0.6rem;
                 font-weight: bold;
@@ -37,47 +46,78 @@
                 letter-spacing: 1px;
                 margin-left: 10px;
                 vertical-align: middle;
+                border: 1px solid rgba(255,255,255,0.2);
             }
-            .badge-green { background-color: #28a745; color: white; }
-            .badge-yellow { background-color: #ffc107; color: black; }
-            .badge-orange { background-color: #fd7e14; color: white; }
-            .badge-red { background-color: #dc3545; color: white; }
+            .badge-green { background-color: rgba(40, 167, 69, 0.2); color: #28a745; border-color: #28a745; }
+            .badge-yellow { background-color: rgba(255, 193, 7, 0.2); color: #ffc107; border-color: #ffc107; }
+            .badge-orange { background-color: rgba(253, 126, 20, 0.2); color: #fd7e14; border-color: #fd7e14; }
+            .badge-red { background-color: rgba(220, 53, 69, 0.2); color: #dc3545; border-color: #dc3545; }
 
-            /* --- NEW PRETTY TIMELINE STYLES --- */
-            .timeline-wrapper {
+            /* --- ROADMAP TIMELINE STYLES --- */
+            .roadmap-wrapper {
                 position: relative;
-                padding-left: 30px;
-                border-left: 2px solid rgba(255, 255, 255, 0.2);
+                padding: 20px 0 20px 30px;
                 margin-top: 2rem;
             }
-            .timeline-item {
-                position: relative;
-                margin-bottom: 2.5rem;
-            }
-            .timeline-item::before {
+            /* The Road Line */
+            .roadmap-wrapper::before {
                 content: '';
                 position: absolute;
-                left: -36px; /* Adjust to sit on the line */
-                top: 5px;
-                width: 14px;
-                height: 14px;
-                background: #1b1f22; /* Match background color */
-                border: 2px solid #ffc107; /* Gold border */
-                border-radius: 50%;
-                box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+                top: 0;
+                bottom: 0;
+                left: 6px;
+                width: 4px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 2px;
             }
-            .timeline-date {
-                font-size: 0.8rem;
+            
+            .roadmap-item {
+                position: relative;
+                margin-bottom: 3rem;
+            }
+            
+            /* The Nodes (Dots) */
+            .roadmap-dot {
+                position: absolute;
+                left: -31px;
+                top: 5px;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: #1b1f22;
+                border: 3px solid #ffffff;
+                z-index: 1;
+                transition: all 0.3s ease;
+            }
+            
+            /* Completed/Active items get color */
+            .roadmap-item.active .roadmap-dot {
+                border-color: #28a745;
+                box-shadow: 0 0 10px #28a745;
+            }
+            .roadmap-item.pending .roadmap-dot {
+                border-color: #ffc107;
+            }
+            
+            /* The Finish Line Flag */
+            .roadmap-item.finish .roadmap-dot {
+                border-color: #00d2ff;
+                box-shadow: 0 0 15px #00d2ff;
+                background: #00d2ff;
+            }
+
+            .roadmap-date {
+                font-size: 0.75rem;
                 font-weight: bold;
-                color: #ffc107; /* Gold text */
                 text-transform: uppercase;
                 letter-spacing: 2px;
-                margin-bottom: 0.2rem;
+                margin-bottom: 0.3rem;
                 display: block;
+                opacity: 0.7;
             }
-            .timeline-content {
-                font-size: 0.9rem;
-                line-height: 1.4;
+            .roadmap-content strong {
+                color: #fff;
+                font-size: 1.1rem;
             }
 
             /* Table Tweak */
@@ -91,20 +131,20 @@
 
                 <header id="header">
                         <div class="logo">
-                            <span class="icon fa-star"></span>
+                            <span class="icon fa-tasks"></span>
                         </div>
                         <div class="content">
                             <div class="inner">
                                 <h1>Freedom 250</h1>
                                 <p>America’s 250th Anniversary Celebration<br />
-                                <strong>Project Status &amp; Command Center</strong></p>
+                                <strong>Progress tracking purposes only</strong></p>
                             </div>
                         </div>
                         <nav>
                             <ul>
                                 <li><a href="#status">Status</a></li>
                                 <li><a href="#personnel">Personnel</a></li>
-                                <li><a href="#timeline">Timeline</a></li>
+                                <li><a href="#timeline">Roadmap</a></li>
                                 <li><a href="#contact">Contact</a></li>
                             </ul>
                         </nav>
@@ -116,25 +156,23 @@
                                 <h2 class="major">Project Status</h2>
                                 <p><strong>Date:</strong> February 18, 2026 &nbsp;&bull;&nbsp; <strong>To:</strong> Front Office / GSO</p>
                                 
-                                <div style="border-left: 4px solid #ffc107; padding-left: 15px; background: rgba(255,255,255,0.05);">
+                                <div style="border-left: 4px solid #ffc107; padding-left: 15px; background: rgba(255,255,255,0.05); margin-bottom: 2rem;">
                                     <strong>Executive Summary:</strong> Moving rapidly on technical infrastructure. A/V requirements split into two tracks (both in quote phase). Event Mgmt and Talent scopes are finalizing SOWs. Venue negotiations pending.
                                 </div>
 
-                                <hr />
-
-                                <h3>Stage &amp; Lighting <span class="status-badge badge-green">Quoting</span></h3>
+                                <h3>Stage &amp; Lighting <span class="status-badge badge-green">Quoting</span> <span class="percent-label">80%</span></h3>
                                 <div class="progress-container"><div class="progress-bar bg-green" style="width: 80%"></div></div>
                                 
-                                <h3>A/V Control <span class="status-badge badge-green">Quoting</span></h3>
+                                <h3>A/V Control <span class="status-badge badge-green">Quoting</span> <span class="percent-label">80%</span></h3>
                                 <div class="progress-container"><div class="progress-bar bg-green" style="width: 80%"></div></div>
                                 
-                                <h3>Venue / UzExpo <span class="status-badge badge-yellow">Pending</span></h3>
+                                <h3>Venue / UzExpo <span class="status-badge badge-yellow">Pending</span> <span class="percent-label">50%</span></h3>
                                 <div class="progress-container"><div class="progress-bar bg-yellow" style="width: 50%"></div></div>
                                 
-                                <h3>Event Mgmt <span class="status-badge badge-yellow">Drafting</span></h3>
+                                <h3>Event Mgmt <span class="status-badge badge-yellow">Drafting</span> <span class="percent-label">40%</span></h3>
                                 <div class="progress-container"><div class="progress-bar bg-yellow" style="width: 40%"></div></div>
                                 
-                                <h3>Talent Mgmt <span class="status-badge badge-orange">Early</span></h3>
+                                <h3>Talent Mgmt <span class="status-badge badge-orange">Early</span> <span class="percent-label">20%</span></h3>
                                 <div class="progress-container"><div class="progress-bar bg-orange" style="width: 20%"></div></div>
                             </article>
 
@@ -234,34 +272,64 @@
                             </article>
 
                         <article id="timeline">
-                                <h2 class="major">Critical Timeline</h2>
-                                <p>Key milestones leading up to May 1st.</p>
+                                <h2 class="major">Project Roadmap</h2>
                                 
-                                <div class="timeline-wrapper">
-                                    <div class="timeline-item">
-                                        <span class="timeline-date">February 25</span>
-                                        <span class="timeline-content"><strong>Venue Confirmation Deadline</strong><br>Must secure Uzexpocentre gratis/waiver.</span>
+                                <div class="roadmap-wrapper">
+                                    
+                                    <div class="roadmap-item active">
+                                        <div class="roadmap-dot"></div>
+                                        <span class="roadmap-date" style="color:#28a745;">COMPLETED</span>
+                                        <div class="roadmap-content">
+                                            <strong>Scope Definition</strong><br>
+                                            SOWs drafted, PRs generated.
+                                        </div>
                                     </div>
-                                    <div class="timeline-item">
-                                        <span class="timeline-date">March 01</span>
-                                        <span class="timeline-content"><strong>Release Event Mgmt RFQ</strong><br>Solicitation for site build and catering.</span>
+
+                                    <div class="roadmap-item pending">
+                                        <div class="roadmap-dot"></div>
+                                        <span class="roadmap-date">FEB 25</span>
+                                        <div class="roadmap-content">
+                                            <strong>Venue Confirmation</strong><br>
+                                            Secure gratis/waiver from UzExpo.
+                                        </div>
                                     </div>
-                                    <div class="timeline-item">
-                                        <span class="timeline-date">March 15</span>
-                                        <span class="timeline-content"><strong>Select A/V Vendor</strong><br>Review technical bids and award contract.</span>
+
+                                    <div class="roadmap-item">
+                                        <div class="roadmap-dot"></div>
+                                        <span class="roadmap-date">MAR 01</span>
+                                        <div class="roadmap-content">
+                                            <strong>Release Event Mgmt RFQ</strong><br>
+                                            Solicitation for site build &amp; catering.
+                                        </div>
                                     </div>
-                                    <div class="timeline-item">
-                                        <span class="timeline-date">April 01</span>
-                                        <span class="timeline-content"><strong>Finalize Talent Lineup</strong><br>Lock in bands and MC.</span>
+
+                                    <div class="roadmap-item">
+                                        <div class="roadmap-dot"></div>
+                                        <span class="roadmap-date">MAR 15</span>
+                                        <div class="roadmap-content">
+                                            <strong>Select A/V Vendor</strong><br>
+                                            Review technical bids and award.
+                                        </div>
                                     </div>
-                                    <div class="timeline-item">
-                                        <span class="timeline-date">April 30</span>
-                                        <span class="timeline-content"><strong>Site Mobilization</strong><br>Trucks enter. Stage build begins.</span>
+
+                                    <div class="roadmap-item">
+                                        <div class="roadmap-dot"></div>
+                                        <span class="roadmap-date">APR 01</span>
+                                        <div class="roadmap-content">
+                                            <strong>Finalize Talent Lineup</strong><br>
+                                            Lock in bands and MC.
+                                        </div>
                                     </div>
-                                    <div class="timeline-item">
-                                        <span class="timeline-date" style="color: #ffffff;">May 01</span>
-                                        <span class="timeline-content"><strong>🇺🇸 FREEDOM 250 EVENT</strong><br>Showtime.</span>
+
+                                    <div class="roadmap-item finish">
+                                        <div class="roadmap-dot"></div>
+                                        <span class="roadmap-date" style="color: #00d2ff;">MAY 01</span>
+                                        <div class="roadmap-content">
+                                            <strong style="color: #00d2ff; font-size: 1.3rem;">FREEDOM 250 EVENT</strong><br>
+                                            Go Live.
+                                        </div>
                                     </div>
+
                                 </div>
                             </article>
 
@@ -277,7 +345,7 @@
                     </div>
 
                 <footer id="footer">
-                        <p class="copyright">&copy; US Embassy Tashkent. Internal Use Only.</p>
+                        <p class="copyright">&copy; Progress tracking purposes only.</p>
                     </footer>
 
             </div>
