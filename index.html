@@ -60,30 +60,20 @@
                 padding: 20px 0 20px 30px;
                 margin-top: 1rem;
             }
-            /* The Road Line */
             .roadmap-wrapper::before {
                 content: '';
                 position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 6px;
+                top: 0; bottom: 0; left: 6px;
                 width: 4px;
                 background: rgba(255, 255, 255, 0.1);
                 border-radius: 2px;
             }
             
-            .roadmap-item {
-                position: relative;
-                margin-bottom: 3rem;
-            }
+            .roadmap-item { position: relative; margin-bottom: 3rem; }
             
-            /* The Nodes (Dots) */
             .roadmap-dot {
-                position: absolute;
-                left: -31px;
-                top: 5px;
-                width: 18px;
-                height: 18px;
+                position: absolute; left: -31px; top: 5px;
+                width: 18px; height: 18px;
                 border-radius: 50%;
                 background: #1b1f22;
                 border: 3px solid #ffffff;
@@ -96,64 +86,120 @@
             .roadmap-item.finish .roadmap-dot { border-color: #00d2ff; box-shadow: 0 0 15px #00d2ff; background: #00d2ff; }
 
             .roadmap-date {
-                font-size: 0.75rem;
-                font-weight: bold;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                margin-bottom: 0.3rem;
-                display: block;
-                opacity: 0.7;
+                font-size: 0.75rem; font-weight: bold;
+                text-transform: uppercase; letter-spacing: 2px;
+                margin-bottom: 0.3rem; display: block; opacity: 0.7;
             }
             .roadmap-content strong { color: #fff; font-size: 1.1rem; }
 
-            /* --- TIME TRACKER (MOVING BAR) --- */
+            /* --- TIME TRACKER --- */
             .time-tracker-box {
                 background: rgba(255,255,255,0.05);
                 border: 1px solid rgba(255,255,255,0.1);
-                padding: 15px;
-                border-radius: 8px;
-                margin-bottom: 30px;
+                padding: 15px; border-radius: 8px; margin-bottom: 30px;
             }
             .time-tracker-header {
-                display: flex;
-                justify-content: space-between;
-                font-size: 0.8rem;
-                margin-bottom: 5px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
+                display: flex; justify-content: space-between;
+                font-size: 0.8rem; margin-bottom: 5px;
+                text-transform: uppercase; letter-spacing: 1px;
             }
             .live-bar-container {
-                height: 6px;
-                background: rgba(0,0,0,0.3);
-                border-radius: 3px;
-                position: relative;
-                overflow: visible; /* Allow marker to pop out */
+                height: 6px; background: rgba(0,0,0,0.3);
+                border-radius: 3px; position: relative; overflow: visible;
             }
             .live-bar-fill {
-                height: 100%;
-                background: linear-gradient(90deg, #28a745, #00d2ff);
-                border-radius: 3px;
-                width: 0%; /* JS will calculate this */
-                position: relative;
+                height: 100%; background: linear-gradient(90deg, #28a745, #00d2ff);
+                border-radius: 3px; width: 0%; position: relative;
             }
             .live-bar-marker {
-                position: absolute;
-                right: -5px;
-                top: -6px;
-                width: 4px;
-                height: 18px;
-                background: #fff;
+                position: absolute; right: -5px; top: -6px;
+                width: 4px; height: 18px; background: #fff;
                 box-shadow: 0 0 10px white;
             }
             .days-left {
-                text-align: center;
-                margin-top: 10px;
-                font-size: 1.2rem;
-                font-weight: bold;
-                color: #00d2ff;
+                text-align: center; margin-top: 10px;
+                font-size: 1.2rem; font-weight: bold; color: #00d2ff;
             }
 
-            /* Table Tweak */
+            /* --- PIPE / FUNDRAISING VISUAL --- */
+            .pipe-wrapper {
+                position: relative;
+                height: 50px;
+                background: #2b2b2b; /* Dark pipe color */
+                border-radius: 25px;
+                border: 2px solid #444;
+                margin: 60px 0 40px 0;
+                box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
+            }
+            /* The "Liquid" or "Repair" Fill */
+            .pipe-fill {
+                height: 100%;
+                /* 1k / 120k = 0.83% width */
+                width: 0.83%; 
+                min-width: 25px; /* Minimum width so worker is visible */
+                background: repeating-linear-gradient(
+                    45deg,
+                    #2ecc71,
+                    #2ecc71 10px,
+                    #27ae60 10px,
+                    #27ae60 20px
+                );
+                border-radius: 25px 0 0 25px;
+                position: relative;
+                transition: width 1s ease-in-out;
+            }
+            /* The Worker Icon */
+            .worker-icon {
+                position: absolute;
+                right: -15px;
+                top: -45px;
+                color: #f1c40f; /* Safety Yellow */
+                font-size: 2.5rem;
+                text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+                z-index: 10;
+            }
+            .worker-tool {
+                font-size: 1rem;
+                position: absolute;
+                right: -10px;
+                top: 10px;
+                color: #ccc;
+                transform: rotate(45deg);
+            }
+            /* The Segments/Ticks on the pipe */
+            .pipe-ticks {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none;
+            }
+            .tick { width: 1px; height: 100%; background: rgba(255,255,255,0.1); }
+            .tick.major { background: rgba(255,255,255,0.3); width: 2px; }
+            
+            /* Milestone Marker */
+            .milestone-marker {
+                position: absolute;
+                left: 50%; /* Middle */
+                top: -30px;
+                transform: translateX(-50%);
+                color: #fff;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+            .milestone-marker::after {
+                content: '';
+                display: block;
+                width: 2px;
+                height: 30px;
+                background: rgba(255,255,255,0.3);
+                margin: 5px auto 0 auto;
+            }
+            
+            .fund-stats {
+                display: flex; justify-content: space-between;
+                margin-top: 10px; font-size: 0.9rem; color: #ccc;
+            }
+
             table th { color: #ffffff !important; font-size: 0.8rem; }
             table td { font-size: 0.8rem; vertical-align: middle; }
         </style>
@@ -182,7 +228,7 @@
                                 <li><a href="#status">Status</a></li>
                                 <li><a href="#personnel">Personnel</a></li>
                                 <li><a href="#timeline">Roadmap</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                                <li><a href="#resources">Resources</a></li>
                             </ul>
                         </nav>
                     </header>
@@ -385,14 +431,39 @@
                                 </div>
                             </article>
 
-                        <article id="contact">
-                                <h2 class="major">Contact</h2>
-                                <p>For questions regarding Freedom 250 procurement or logistics:</p>
-                                <ul class="icons">
-                                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a> TashkentProcurementTeam@state.gov</li>
-                                    <li><a href="#" class="icon solid fa-phone"><span class="label">Phone</span></a> GSO Main Line</li>
+                        <article id="resources">
+                                <h2 class="major">Resource Mobilization</h2>
+                                <p>Tracking the status of contributed resources and operational units. <br> <em>(Visual Representation: 1 Unit = 1k Allocation)</em></p>
+                                
+                                <div class="milestone-marker">Milestone (50%)</div>
+                                <div class="pipe-wrapper">
+                                    <div class="pipe-ticks">
+                                        <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+                                        <div class="tick major"></div> <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+                                    </div>
+                                    
+                                    <div class="pipe-fill">
+                                        <div class="worker-icon">
+                                            <span class="icon fa-hard-hat"></span>
+                                            <span class="icon fa-wrench worker-tool"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="fund-stats">
+                                    <span><strong>START</strong><br>0 Units</span>
+                                    <span style="text-align:center;"><strong>CURRENT STATUS</strong><br>1 Unit Secured (1k)</span>
+                                    <span style="text-align:right;"><strong>GOAL</strong><br>120 Units (Total)</span>
+                                </div>
+
+                                <hr />
+                                <h3 class="major">Action Items</h3>
+                                <ul class="alt">
+                                    <li>Confirm partnership with Coke/KFC (In-kind donations).</li>
+                                    <li>Secure funding string for Event Mgmt contract.</li>
+                                    <li>Finalize budget request for Talent riders.</li>
                                 </ul>
-                            </article>
+                        </article>
 
                     </div>
 
