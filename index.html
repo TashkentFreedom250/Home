@@ -9,11 +9,11 @@
         <style>
             /* --- DASHBOARD STYLES --- */
             
-            /* Progress Bars */
+            /* Progress Bars for Status */
             .progress-container {
                 background-color: rgba(255, 255, 255, 0.1);
                 border-radius: 4px;
-                height: 12px; /* Slightly thicker */
+                height: 12px;
                 width: 100%;
                 margin-bottom: 1.5rem;
                 overflow: hidden;
@@ -34,6 +34,7 @@
             .bg-yellow { background-color: #ffc107; }
             .bg-orange { background-color: #fd7e14; }
             .bg-red { background-color: #dc3545; }
+            .bg-blue { background-color: #00d2ff; }
 
             /* Badges */
             .status-badge {
@@ -57,7 +58,7 @@
             .roadmap-wrapper {
                 position: relative;
                 padding: 20px 0 20px 30px;
-                margin-top: 2rem;
+                margin-top: 1rem;
             }
             /* The Road Line */
             .roadmap-wrapper::before {
@@ -90,21 +91,9 @@
                 transition: all 0.3s ease;
             }
             
-            /* Completed/Active items get color */
-            .roadmap-item.active .roadmap-dot {
-                border-color: #28a745;
-                box-shadow: 0 0 10px #28a745;
-            }
-            .roadmap-item.pending .roadmap-dot {
-                border-color: #ffc107;
-            }
-            
-            /* The Finish Line Flag */
-            .roadmap-item.finish .roadmap-dot {
-                border-color: #00d2ff;
-                box-shadow: 0 0 15px #00d2ff;
-                background: #00d2ff;
-            }
+            .roadmap-item.active .roadmap-dot { border-color: #28a745; box-shadow: 0 0 10px #28a745; }
+            .roadmap-item.pending .roadmap-dot { border-color: #ffc107; }
+            .roadmap-item.finish .roadmap-dot { border-color: #00d2ff; box-shadow: 0 0 15px #00d2ff; background: #00d2ff; }
 
             .roadmap-date {
                 font-size: 0.75rem;
@@ -115,9 +104,53 @@
                 display: block;
                 opacity: 0.7;
             }
-            .roadmap-content strong {
-                color: #fff;
-                font-size: 1.1rem;
+            .roadmap-content strong { color: #fff; font-size: 1.1rem; }
+
+            /* --- TIME TRACKER (MOVING BAR) --- */
+            .time-tracker-box {
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.1);
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+            .time-tracker-header {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.8rem;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            .live-bar-container {
+                height: 6px;
+                background: rgba(0,0,0,0.3);
+                border-radius: 3px;
+                position: relative;
+                overflow: visible; /* Allow marker to pop out */
+            }
+            .live-bar-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #28a745, #00d2ff);
+                border-radius: 3px;
+                width: 0%; /* JS will calculate this */
+                position: relative;
+            }
+            .live-bar-marker {
+                position: absolute;
+                right: -5px;
+                top: -6px;
+                width: 4px;
+                height: 18px;
+                background: #fff;
+                box-shadow: 0 0 10px white;
+            }
+            .days-left {
+                text-align: center;
+                margin-top: 10px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #00d2ff;
             }
 
             /* Table Tweak */
@@ -131,13 +164,16 @@
 
                 <header id="header">
                         <div class="logo">
-                            <span class="icon fa-tasks"></span>
+                            <span class="icon fa-star"></span>
                         </div>
                         <div class="content">
                             <div class="inner">
                                 <h1>Freedom 250</h1>
                                 <p>America’s 250th Anniversary Celebration<br />
-                                <strong>Progress tracking purposes only</strong></p>
+                                <strong>Project Status &amp; Command Center</strong></p>
+                                <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                                    3,000+ Guests &bull; UzExpocentre &bull; High-Level Protocol Event
+                                </p>
                             </div>
                         </div>
                         <nav>
@@ -273,6 +309,21 @@
 
                         <article id="timeline">
                                 <h2 class="major">Project Roadmap</h2>
+
+                                <div class="time-tracker-box">
+                                    <div class="time-tracker-header">
+                                        <span>Project Start (Feb 1)</span>
+                                        <span>Event Day (May 1)</span>
+                                    </div>
+                                    <div class="live-bar-container">
+                                        <div class="live-bar-fill" id="liveTimeBar">
+                                            <div class="live-bar-marker"></div>
+                                        </div>
+                                    </div>
+                                    <div class="days-left" id="daysLeftCounter">
+                                        -- Days Until Freedom 250
+                                    </div>
+                                </div>
                                 
                                 <div class="roadmap-wrapper">
                                     
@@ -357,6 +408,34 @@
             <script src="assets/js/breakpoints.min.js"></script>
             <script src="assets/js/util.js"></script>
             <script src="assets/js/main.js"></script>
+
+            <script>
+                // Calculate Time Progress
+                document.addEventListener('DOMContentLoaded', function() {
+                    const startDate = new Date("2026-02-01").getTime();
+                    const eventDate = new Date("2026-05-01").getTime();
+                    
+                    // NOTE: using a fixed date here for demo purposes so the bar shows as "Today" relative to the report date
+                    // In real life, use: const now = new Date().getTime();
+                    const now = new Date("2026-02-18").getTime(); 
+
+                    // Calculate Percentage
+                    const totalDuration = eventDate - startDate;
+                    const elapsed = now - startDate;
+                    let percentage = (elapsed / totalDuration) * 100;
+
+                    // Bounds check
+                    if (percentage < 0) percentage = 0;
+                    if (percentage > 100) percentage = 100;
+
+                    // Update Bar
+                    document.getElementById('liveTimeBar').style.width = percentage + "%";
+
+                    // Calculate Days Left
+                    const daysLeft = Math.ceil((eventDate - now) / (1000 * 60 * 60 * 24));
+                    document.getElementById('daysLeftCounter').innerHTML = daysLeft + " Days Until Freedom 250";
+                });
+            </script>
 
     </body>
 </html>
