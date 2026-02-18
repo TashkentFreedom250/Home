@@ -121,83 +121,58 @@
                 font-size: 1.2rem; font-weight: bold; color: #00d2ff;
             }
 
-            /* --- PIPE / FUNDRAISING VISUAL --- */
-            .pipe-wrapper {
+            /* --- BAREBONES PIPE VISUAL --- */
+            .resource-pipe-container {
+                margin: 50px 0;
                 position: relative;
-                height: 50px;
-                background: #2b2b2b; /* Dark pipe color */
-                border-radius: 25px;
-                border: 2px solid #444;
-                margin: 60px 0 40px 0;
-                box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
             }
-            /* The "Liquid" or "Repair" Fill */
-            .pipe-fill {
+            
+            .resource-pipe-bar {
+                height: 40px;
+                background: #2b2b2b;
+                border: 2px solid #555;
+                border-radius: 20px;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            /* The "1" Fill */
+            .resource-filled {
                 height: 100%;
-                /* 1k / 120k = 0.83% width */
-                width: 0.83%; 
-                min-width: 25px; /* Minimum width so worker is visible */
-                background: repeating-linear-gradient(
-                    45deg,
-                    #2ecc71,
-                    #2ecc71 10px,
-                    #27ae60 10px,
-                    #27ae60 20px
-                );
-                border-radius: 25px 0 0 25px;
+                background: #00d2ff; /* Bright Blue */
+                width: 0.83%; /* 1 divided by 120 */
+                min-width: 8px; /* Visibility min */
                 position: relative;
-                transition: width 1s ease-in-out;
             }
-            /* The Worker Icon */
-            .worker-icon {
-                position: absolute;
-                right: -15px;
-                top: -45px;
-                color: #f1c40f; /* Safety Yellow */
-                font-size: 2.5rem;
-                text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-                z-index: 10;
-            }
-            .worker-tool {
-                font-size: 1rem;
-                position: absolute;
-                right: -10px;
-                top: 10px;
-                color: #ccc;
-                transform: rotate(45deg);
-            }
-            /* The Segments/Ticks on the pipe */
-            .pipe-ticks {
-                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none;
-            }
-            .tick { width: 1px; height: 100%; background: rgba(255,255,255,0.1); }
-            .tick.major { background: rgba(255,255,255,0.3); width: 2px; }
             
-            /* Milestone Marker */
-            .milestone-marker {
+            /* The Milestone Line (60) */
+            .milestone-line {
                 position: absolute;
-                left: 50%; /* Middle */
-                top: -30px;
-                transform: translateX(-50%);
-                color: #fff;
-                font-size: 0.7rem;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                text-align: center;
-            }
-            .milestone-marker::after {
-                content: '';
-                display: block;
+                left: 50%;
+                top: 0;
+                bottom: 0;
                 width: 2px;
-                height: 30px;
-                background: rgba(255,255,255,0.3);
-                margin: 5px auto 0 auto;
+                background: repeating-linear-gradient(to bottom, #ffc107, #ffc107 4px, transparent 4px, transparent 8px);
+                z-index: 5;
             }
             
-            .fund-stats {
-                display: flex; justify-content: space-between;
-                margin-top: 10px; font-size: 0.9rem; color: #ccc;
+            /* Labels */
+            .pipe-label {
+                position: absolute;
+                top: -25px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                color: #ccc;
+            }
+            .label-start { left: 0; color: #00d2ff; }
+            .label-mid { left: 50%; transform: translateX(-50%); color: #ffc107; }
+            .label-end { right: 0; }
+            
+            .pipe-description {
+                text-align: center;
+                font-size: 0.9rem;
+                margin-top: 10px;
+                opacity: 0.7;
             }
 
             table th { color: #ffffff !important; font-size: 0.8rem; }
@@ -433,35 +408,28 @@
 
                         <article id="resources">
                                 <h2 class="major">Resource Mobilization</h2>
-                                <p>Tracking the status of contributed resources and operational units. <br> <em>(Visual Representation: 1 Unit = 1k Allocation)</em></p>
+                                <p>Operational unit tracking and allocation.</p>
                                 
-                                <div class="milestone-marker">Milestone (50%)</div>
-                                <div class="pipe-wrapper">
-                                    <div class="pipe-ticks">
-                                        <div class="tick"></div><div class="tick"></div><div class="tick"></div>
-                                        <div class="tick major"></div> <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+                                <div class="resource-pipe-container">
+                                    <div class="pipe-label label-start">1 Unit</div>
+                                    <div class="pipe-label label-mid">Milestone: 60</div>
+                                    <div class="pipe-label label-end">120 Total</div>
+
+                                    <div class="resource-pipe-bar">
+                                        <div class="resource-filled"></div>
+                                        <div class="milestone-line"></div>
                                     </div>
                                     
-                                    <div class="pipe-fill">
-                                        <div class="worker-icon">
-                                            <span class="icon fa-hard-hat"></span>
-                                            <span class="icon fa-wrench worker-tool"></span>
-                                        </div>
+                                    <div class="pipe-description">
+                                        Current: <strong>1 Unit Secured</strong> (0.8%)
                                     </div>
                                 </div>
-                                
-                                <div class="fund-stats">
-                                    <span><strong>START</strong><br>0 Units</span>
-                                    <span style="text-align:center;"><strong>CURRENT STATUS</strong><br>1 Unit Secured (1k)</span>
-                                    <span style="text-align:right;"><strong>GOAL</strong><br>120 Units (Total)</span>
-                                </div>
 
-                                <hr />
-                                <h3 class="major">Action Items</h3>
+                                <h3 class="major">Action Plan</h3>
                                 <ul class="alt">
-                                    <li>Confirm partnership with Coke/KFC (In-kind donations).</li>
+                                    <li>Deadline for Milestone (60 Units): <strong>See Roadmap</strong></li>
+                                    <li>Prioritize in-kind donations.</li>
                                     <li>Secure funding string for Event Mgmt contract.</li>
-                                    <li>Finalize budget request for Talent riders.</li>
                                 </ul>
                         </article>
 
