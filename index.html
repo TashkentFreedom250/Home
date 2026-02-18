@@ -9,7 +9,7 @@
         <style>
             /* --- DASHBOARD STYLES --- */
             
-            /* Progress Bars for Status */
+            /* Progress Bars */
             .progress-container {
                 background-color: rgba(255, 255, 255, 0.1);
                 border-radius: 4px;
@@ -164,7 +164,7 @@
 
                 <header id="header">
                         <div class="logo">
-                            <span class="icon solid fa-star"></span>
+                            <span class="icon fa-star"></span>
                         </div>
                         <div class="content">
                             <div class="inner">
@@ -191,7 +191,7 @@
 
                         <article id="status">
                                 <h2 class="major">Project Status</h2>
-                                <p><strong>Date:</strong> February 18, 2026</p>
+                                <p><strong>Last Updated:</strong> February 18, 2026</p>
                                 
                                 <div style="border-left: 4px solid #ffc107; padding-left: 15px; background: rgba(255,255,255,0.05); margin-bottom: 2rem;">
                                     <strong>Executive Summary:</strong> Moving rapidly on technical infrastructure. A/V requirements split into two tracks (both in quote phase). Event Mgmt and Talent scopes are finalizing SOWs. Venue negotiations pending.
@@ -411,27 +411,22 @@
             <script src="assets/js/main.js"></script>
 
             <script>
-                // Calculate Time Progress
                 document.addEventListener('DOMContentLoaded', function() {
                     const startDate = new Date("2026-02-01").getTime();
                     const eventDate = new Date("2026-05-01").getTime();
                     
-                    // Current simulated date
+                    // Fixed 'Current' Date for the report snapshot
                     const now = new Date("2026-02-18").getTime(); 
 
-                    // Calculate Percentage
                     const totalDuration = eventDate - startDate;
                     const elapsed = now - startDate;
                     let percentage = (elapsed / totalDuration) * 100;
 
-                    // Bounds check
                     if (percentage < 0) percentage = 0;
                     if (percentage > 100) percentage = 100;
 
-                    // Update Bar
                     document.getElementById('liveTimeBar').style.width = percentage + "%";
 
-                    // Calculate Days Left
                     const daysLeft = Math.ceil((eventDate - now) / (1000 * 60 * 60 * 24));
                     document.getElementById('daysLeftCounter').innerHTML = daysLeft + " Days Until Freedom 250";
                 });
