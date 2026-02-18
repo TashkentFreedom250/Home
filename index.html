@@ -7,40 +7,82 @@
         <link rel="stylesheet" href="assets/css/main.css" />
         <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         <style>
-            /* Custom styles to match the template dark theme */
+            /* --- DASHBOARD STYLES --- */
+            
+            /* Progress Bars */
             .progress-container {
                 background-color: rgba(255, 255, 255, 0.1);
                 border-radius: 4px;
-                height: 10px;
+                height: 8px;
                 width: 100%;
                 margin-bottom: 1rem;
                 overflow: hidden;
             }
-            .progress-bar {
-                height: 100%;
-                border-radius: 4px;
-                transition: width 0.5s ease;
-            }
+            .progress-bar { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+            
+            /* Status Colors */
             .bg-green { background-color: #28a745; }
             .bg-yellow { background-color: #ffc107; }
             .bg-orange { background-color: #fd7e14; }
-            
+            .bg-red { background-color: #dc3545; }
+
+            /* Badges */
             .status-badge {
                 display: inline-block;
                 padding: 0.2rem 0.6rem;
                 border-radius: 4px;
-                font-size: 0.7rem;
+                font-size: 0.6rem;
                 font-weight: bold;
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 margin-left: 10px;
-                color: #1b1f22; 
+                vertical-align: middle;
             }
             .badge-green { background-color: #28a745; color: white; }
             .badge-yellow { background-color: #ffc107; color: black; }
             .badge-orange { background-color: #fd7e14; color: white; }
-            
-            table th { color: #ffffff !important; }
+            .badge-red { background-color: #dc3545; color: white; }
+
+            /* --- NEW PRETTY TIMELINE STYLES --- */
+            .timeline-wrapper {
+                position: relative;
+                padding-left: 30px;
+                border-left: 2px solid rgba(255, 255, 255, 0.2);
+                margin-top: 2rem;
+            }
+            .timeline-item {
+                position: relative;
+                margin-bottom: 2.5rem;
+            }
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -36px; /* Adjust to sit on the line */
+                top: 5px;
+                width: 14px;
+                height: 14px;
+                background: #1b1f22; /* Match background color */
+                border: 2px solid #ffc107; /* Gold border */
+                border-radius: 50%;
+                box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+            }
+            .timeline-date {
+                font-size: 0.8rem;
+                font-weight: bold;
+                color: #ffc107; /* Gold text */
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 0.2rem;
+                display: block;
+            }
+            .timeline-content {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            /* Table Tweak */
+            table th { color: #ffffff !important; font-size: 0.8rem; }
+            table td { font-size: 0.8rem; vertical-align: middle; }
         </style>
     </head>
     <body class="is-preload">
@@ -55,7 +97,7 @@
                             <div class="inner">
                                 <h1>Freedom 250</h1>
                                 <p>America’s 250th Anniversary Celebration<br />
-                                Project Status &amp; Command Center</p>
+                                <strong>Project Status &amp; Command Center</strong></p>
                             </div>
                         </div>
                         <nav>
@@ -74,92 +116,62 @@
                                 <h2 class="major">Project Status</h2>
                                 <p><strong>Date:</strong> February 18, 2026 &nbsp;&bull;&nbsp; <strong>To:</strong> Front Office / GSO</p>
                                 
-                                <blockquote>
-                                    <strong>Executive Summary:</strong> We are moving rapidly on technical infrastructure. A/V requirements are split into two tracks (both in quote phase). Event Mgmt and Talent scopes are finalizing SOWs. Venue negotiations pending.
-                                </blockquote>
+                                <div style="border-left: 4px solid #ffc107; padding-left: 15px; background: rgba(255,255,255,0.05);">
+                                    <strong>Executive Summary:</strong> Moving rapidly on technical infrastructure. A/V requirements split into two tracks (both in quote phase). Event Mgmt and Talent scopes are finalizing SOWs. Venue negotiations pending.
+                                </div>
 
                                 <hr />
 
-                                <h3>Stage &amp; Lighting (PR #1) <span class="status-badge badge-green">Quoting</span></h3>
-                                <div class="progress-container">
-                                    <div class="progress-bar bg-green" style="width: 80%"></div>
-                                </div>
-                                <ul>
-                                    <li><strong>Scope:</strong> Truss, Roof Systems, Rigging.</li>
-                                    <li><strong>Action:</strong> Reviewing structural safety certifications in incoming quotes.</li>
-                                </ul>
-
-                                <h3>A/V Control (PR #2) <span class="status-badge badge-green">Quoting</span></h3>
-                                <div class="progress-container">
-                                    <div class="progress-bar bg-green" style="width: 80%"></div>
-                                </div>
-                                <ul>
-                                    <li><strong>Scope:</strong> LED Walls, Sound, Cameras.</li>
-                                    <li><strong>Action:</strong> Receiving bids for high-end electronics.</li>
-                                </ul>
-
+                                <h3>Stage &amp; Lighting <span class="status-badge badge-green">Quoting</span></h3>
+                                <div class="progress-container"><div class="progress-bar bg-green" style="width: 80%"></div></div>
+                                
+                                <h3>A/V Control <span class="status-badge badge-green">Quoting</span></h3>
+                                <div class="progress-container"><div class="progress-bar bg-green" style="width: 80%"></div></div>
+                                
                                 <h3>Venue / UzExpo <span class="status-badge badge-yellow">Pending</span></h3>
-                                <div class="progress-container">
-                                    <div class="progress-bar bg-yellow" style="width: 50%"></div>
-                                </div>
-                                <ul>
-                                    <li><strong>Scope:</strong> Terrace Rental.</li>
-                                    <li><strong>Action:</strong> Awaiting response on "Gratis" diplomatic request.</li>
-                                </ul>
-
+                                <div class="progress-container"><div class="progress-bar bg-yellow" style="width: 50%"></div></div>
+                                
                                 <h3>Event Mgmt <span class="status-badge badge-yellow">Drafting</span></h3>
-                                <div class="progress-container">
-                                    <div class="progress-bar bg-yellow" style="width: 40%"></div>
-                                </div>
-                                <ul>
-                                    <li><strong>Scope:</strong> Decor, VIP Catering.</li>
-                                    <li><strong>Action:</strong> Finalizing VIP Zone SOW and layout.</li>
-                                </ul>
-
+                                <div class="progress-container"><div class="progress-bar bg-yellow" style="width: 40%"></div></div>
+                                
                                 <h3>Talent Mgmt <span class="status-badge badge-orange">Early</span></h3>
-                                <div class="progress-container">
-                                    <div class="progress-bar bg-orange" style="width: 20%"></div>
-                                </div>
-                                <ul>
-                                    <li><strong>Scope:</strong> Artists, DJ.</li>
-                                    <li><strong>Action:</strong> Defining "Diplomatic Experience" criteria.</li>
-                                </ul>
+                                <div class="progress-container"><div class="progress-bar bg-orange" style="width: 20%"></div></div>
                             </article>
 
                         <article id="personnel">
                                 <h2 class="major">Assignments</h2>
                                 
                                 <section>
-                                    <h3 class="major">1. COR Team (Technical Review)</h3>
+                                    <h3 class="major">1. COR Team (Technical)</h3>
                                     <div class="table-wrapper">
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Contract</th>
+                                                    <th>Role / PR</th>
                                                     <th>Assigned To</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>A/V &amp; Light</td>
-                                                    <td>Pri: Andreyev, Sergey A.<br>Back: Zabara, Alexander V.</td>
+                                                    <td><strong>A/V &amp; Lighting</strong><br>(PR #1 &amp; #2)</td>
+                                                    <td>Pri: <strong>Sergey A.</strong><br>Back: <strong>Alexander V.</strong></td>
                                                     <td><span class="status-badge badge-green">Filled</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Event Mgmt</td>
+                                                    <td><strong>Event Mgmt</strong><br>(PR #3)</td>
                                                     <td>[Need GSO Nominee]</td>
-                                                    <td><span class="status-badge badge-orange">Vacant</span></td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Talent</td>
+                                                    <td><strong>Talent &amp; Artistic</strong><br>(PR #4)</td>
                                                     <td>[Need PD Nominee]</td>
-                                                    <td><span class="status-badge badge-orange">Vacant</span></td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Venue</td>
+                                                    <td><strong>Venue</strong><br>(PR #5)</td>
                                                     <td>[Need Protocol Nominee]</td>
-                                                    <td><span class="status-badge badge-orange">Vacant</span></td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -173,25 +185,47 @@
                                             <thead>
                                                 <tr>
                                                     <th>Role</th>
-                                                    <th>Responsibility</th>
+                                                    <th>Assigned To</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><strong>Food Marshall</strong></td>
-                                                    <td>KFC/Coke Logistics &amp; Safety</td>
-                                                    <td><span class="status-badge badge-orange">Vacant</span></td>
+                                                    <td><strong>Brand &amp; Food Liaison</strong><br><em>(Leadership Request)</em></td>
+                                                    <td>[Priority Need]</td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Safety Liaison</strong></td>
-                                                    <td>RSO / Presidential Entry</td>
-                                                    <td><span class="status-badge badge-orange">Vacant</span></td>
+                                                    <td><strong>Safety &amp; Security</strong><br><em>Coordinate with RSO</em></td>
+                                                    <td>[Need RSO Nominee]</td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>VIP Protocol</strong></td>
-                                                    <td>Green Room &amp; VIP Lounge</td>
-                                                    <td><span class="status-badge badge-orange">Vacant</span></td>
+                                                    <td><strong>VIP Protocol Mgr</strong><br><em>Invitations/Lounge</em></td>
+                                                    <td>[Need Protocol Nominee]</td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <h3 class="major">3. Program Team</h3>
+                                    <div class="table-wrapper">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Role</th>
+                                                    <th>Assigned To</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Volunteer Coord</strong><br><em>Manage 20-30 Vols</em></td>
+                                                    <td>[Vacancy]</td>
+                                                    <td><span class="status-badge badge-red">Vacant</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -200,16 +234,35 @@
                             </article>
 
                         <article id="timeline">
-                                <h2 class="major">Timeline</h2>
-                                <p>Key milestones for the next 90 days.</p>
-                                <ul>
-                                    <li><strong>Feb 25:</strong> Venue confirmation deadline.</li>
-                                    <li><strong>Mar 01:</strong> Release Event Mgmt RFQ.</li>
-                                    <li><strong>Mar 15:</strong> Select A/V Vendor.</li>
-                                    <li><strong>Apr 01:</strong> Finalize Talent Lineup.</li>
-                                    <li><strong>Apr 30:</strong> Site Setup Begins.</li>
-                                    <li><strong>May 01:</strong> Freedom 250 Event.</li>
-                                </ul>
+                                <h2 class="major">Critical Timeline</h2>
+                                <p>Key milestones leading up to May 1st.</p>
+                                
+                                <div class="timeline-wrapper">
+                                    <div class="timeline-item">
+                                        <span class="timeline-date">February 25</span>
+                                        <span class="timeline-content"><strong>Venue Confirmation Deadline</strong><br>Must secure Uzexpocentre gratis/waiver.</span>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <span class="timeline-date">March 01</span>
+                                        <span class="timeline-content"><strong>Release Event Mgmt RFQ</strong><br>Solicitation for site build and catering.</span>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <span class="timeline-date">March 15</span>
+                                        <span class="timeline-content"><strong>Select A/V Vendor</strong><br>Review technical bids and award contract.</span>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <span class="timeline-date">April 01</span>
+                                        <span class="timeline-content"><strong>Finalize Talent Lineup</strong><br>Lock in bands and MC.</span>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <span class="timeline-date">April 30</span>
+                                        <span class="timeline-content"><strong>Site Mobilization</strong><br>Trucks enter. Stage build begins.</span>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <span class="timeline-date" style="color: #ffffff;">May 01</span>
+                                        <span class="timeline-content"><strong>🇺🇸 FREEDOM 250 EVENT</strong><br>Showtime.</span>
+                                    </div>
+                                </div>
                             </article>
 
                         <article id="contact">
@@ -224,7 +277,7 @@
                     </div>
 
                 <footer id="footer">
-                        <p class="copyright">&copy; US Embassy Tashkent. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                        <p class="copyright">&copy; US Embassy Tashkent. Internal Use Only.</p>
                     </footer>
 
             </div>
