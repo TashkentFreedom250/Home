@@ -13,22 +13,26 @@ export default function Program() {
 
   return (
     <main className="program">
-      <Link to="/" className="program-hero" aria-label="Back to home">
-        <span className="program-back">← Back</span>
-      </Link>
+      <div className="program-hero">
+        <Link to="/" className="program-back" aria-label="Back to home">← Back</Link>
+        <div className="program-hero-overlay">
+          <p className="program-hero-eyebrow">An evening of</p>
+          <h1 className="program-hero-title">Program</h1>
+          <p className="program-hero-sub">June 10, 2026 · Uzexpocentre, Tashkent</p>
+        </div>
+      </div>
 
       <section className="program-body">
-        <h1 className="program-title">Program</h1>
-        <p className="program-sub">June 10, 2026 · Uzexpocentre, Tashkent</p>
         {note && <p className="program-note">{note}</p>}
 
         <ol className="program-list">
           {blocks.map((block, i) => (
             <li className={`program-row cat-${block.category}`} key={i}>
-              <time className="program-time">{block.time}</time>
-              <div className="program-item">
-                <span className="program-item-text">{block.item}</span>
-                <span className="program-tag">
+              <span className="program-row-rail" aria-hidden="true" />
+              <time className="program-row-time">{block.time}</time>
+              <div className="program-row-content">
+                <p className="program-row-item">{block.item}</p>
+                <span className="program-row-tag">
                   {CATEGORY_LABEL[block.category] ?? block.category}
                 </span>
               </div>
