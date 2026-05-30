@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
 import { freedomLogoGold } from '../assets/freedom250'
 import banner from '../assets/banner/freedom250-banner.jpg'
+import GlobeLoader from '../components/GlobeLoader'
 
 export default function Landing() {
   return (
     <main className="landing">
       <div className="landing-top">
         <div className="landing-stage">
-          <div className="landing-halo" aria-hidden="true" />
+          <GlobeLoader size={340} />
           <img className="landing-logo" src={freedomLogoGold} alt="Freedom 250" />
         </div>
       </div>
