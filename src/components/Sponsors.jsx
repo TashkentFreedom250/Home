@@ -4,7 +4,6 @@ const SPONSORS = [
   { key: 'coca-cola',   name: 'Coca-Cola',     tier: 'Presenting'    },
   { key: 'pepsi',       name: 'Pepsi',         tier: 'Beverage'      },
   { key: 'papa-johns',  name: "Papa John's",   tier: 'Pizza'         },
-  { key: 'dominos',     name: "Domino's",      tier: 'Pizza'         },
   { key: 'wendys',      name: "Wendy's",       tier: 'Quick Service' },
   { key: 'burger-king', name: 'Burger King',   tier: 'Quick Service' },
 ]
