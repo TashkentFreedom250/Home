@@ -72,7 +72,6 @@ function SponsorTile({ sponsor }) {
   const classes = [
     'sponsor-chip',
     sponsor.size ? `sponsor-chip-${sponsor.size}` : '',
-    sponsor.dark ? 'sponsor-chip-dark' : '',
     sponsor.logo ? '' : 'sponsor-chip-missing',
   ].filter(Boolean).join(' ')
 
@@ -92,6 +91,8 @@ function SponsorTile({ sponsor }) {
 }
 
 export default function Sponsors() {
+  const rollingSponsors = [...SPONSORS, ...SPONSORS]
+
   return (
     <section className="sponsors enter d2" aria-labelledby="sponsors-heading">
       <header className="sponsors-head">
@@ -104,10 +105,12 @@ export default function Sponsors() {
         </h2>
       </header>
 
-      <div className="sponsor-wall" role="list" aria-label="Sponsor logos">
-        {SPONSORS.map(sponsor => (
-          <SponsorTile sponsor={sponsor} key={sponsor.key} />
-        ))}
+      <div className="sponsor-wall" role="region" aria-label="Sponsor logos">
+        <div className="sponsor-rail">
+          {rollingSponsors.map((sponsor, index) => (
+            <SponsorTile sponsor={sponsor} key={`${sponsor.key}-${index}`} />
+          ))}
+        </div>
       </div>
     </section>
   )

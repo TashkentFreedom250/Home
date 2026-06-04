@@ -526,20 +526,41 @@
 }
 
 .sponsor-wall {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
-  gap: 10px;
-  width: min(100%, 1120px);
+  position: relative;
+  width: min(100%, 1180px);
   margin: 0 auto;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.sponsor-rail {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 12px;
+  padding: 4px 6px;
+  animation: sponsorRail 72s linear infinite;
+  will-change: transform;
+}
+
+.sponsor-wall:hover .sponsor-rail {
+  animation-play-state: paused;
+}
+
+@keyframes sponsorRail {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 6px)); }
 }
 
 .sponsor-chip {
   position: relative;
   display: grid;
   place-items: center;
-  min-width: 0;
-  height: 82px;
-  padding: 10px;
+  flex: 0 0 auto;
+  width: clamp(150px, 13vw, 184px);
+  height: 78px;
+  padding: 11px 14px;
   border: 1px solid rgba(255, 255, 255, 0.68);
   border-radius: 8px;
   background:
@@ -577,13 +598,6 @@
 
 .sponsor-chip:hover::before {
   opacity: 1;
-}
-
-.sponsor-chip-dark {
-  background:
-    linear-gradient(180deg, rgba(14, 17, 28, 0.98), rgba(20, 24, 37, 0.94)),
-    #111522;
-  border-color: rgba(255, 255, 255, 0.14);
 }
 
 .sponsor-chip-missing {
@@ -627,17 +641,13 @@
 }
 
 .sponsor-chip-mark .sponsor-logo {
-  max-width: 64px;
+  max-width: 70px;
   max-height: 50px;
 }
 
 .sponsor-chip-tall .sponsor-logo {
   max-width: 84px;
   max-height: 52px;
-}
-
-.sponsor-chip-dark .sponsor-logo {
-  filter: saturate(1.02) contrast(1.06);
 }
 
 .sponsor-text {
@@ -668,13 +678,20 @@
   }
 
   .sponsor-wall {
-    grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
-    gap: 8px;
+    width: 100%;
+    mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  }
+
+  .sponsor-rail {
+    gap: 10px;
+    animation-duration: 56s;
   }
 
   .sponsor-chip {
+    width: 134px;
     height: 72px;
-    padding: 8px;
+    padding: 9px 11px;
   }
 
   .sponsor-logo-stage {
