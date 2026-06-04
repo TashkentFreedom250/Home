@@ -15,6 +15,7 @@ import usapeec from '../assets/sponsors/usapeec.jpg'
 import valley from '../assets/sponsors/valley.jpg'
 import usBeef from '../assets/sponsors/us-beef.png'
 import burgerKing from '../assets/sponsors/burger-king.png'
+import mig from '../assets/sponsors/mig.png'
 
 const SPONSORS = [
   { key: 'boeing',          name: 'Boeing',                          logo: boeing },
@@ -33,6 +34,7 @@ const SPONSORS = [
   { key: 'valley',          name: 'Valley by Valmont',               logo: valley },
   { key: 'us-beef',         name: 'U.S. Beef',                       logo: usBeef },
   { key: 'burger-king',     name: 'Burger King',                     logo: burgerKing },
+  { key: 'mig',             name: 'MIG',                             logo: mig },
 ]
 
 function SponsorTile({ sponsor }) {
