@@ -16,6 +16,8 @@ import valley from '../assets/sponsors/valley.jpg'
 import usBeef from '../assets/sponsors/us-beef.png'
 import burgerKing from '../assets/sponsors/burger-king.png'
 import mig from '../assets/sponsors/mig.png'
+import balton from '../assets/sponsors/balton.png'
+import americanPaints from '../assets/sponsors/american-paints.png'
 
 const SPONSORS = [
   { key: 'boeing',          name: 'Boeing',                          logo: boeing },
@@ -32,9 +34,11 @@ const SPONSORS = [
   { key: 'wendys',          name: "Wendy's",                         logo: wendys },
   { key: 'usapeec',         name: 'USA Poultry & Egg Export Council', logo: usapeec },
   { key: 'valley',          name: 'Valley by Valmont',               logo: valley },
-  { key: 'us-beef',         name: 'U.S. Beef',                       logo: usBeef },
+  { key: 'us-beef',         name: 'US Meat Export Federation',       logo: usBeef },
   { key: 'burger-king',     name: 'Burger King',                     logo: burgerKing },
-  { key: 'mig',             name: 'MIG',                             logo: mig },
+  { key: 'mig',             name: 'Mosaic Insurance Group',          logo: mig },
+  { key: 'balton',          name: 'Balton Trading',                  logo: balton },
+  { key: 'american-paints', name: 'American Paints',                 logo: americanPaints },
 ]
 
 function SponsorTile({ sponsor }) {
