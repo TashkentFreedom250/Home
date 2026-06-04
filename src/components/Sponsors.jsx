@@ -68,7 +68,7 @@ const SPONSORS = [
   { key: 'crowe',           name: 'Crowe',                             logo: crowe, size: 'wide' },
 ]
 
-function SponsorTile({ sponsor }) {
+function SponsorTile({ sponsor, duplicate = false }) {
   const classes = [
     'sponsor-chip',
     sponsor.size ? `sponsor-chip-${sponsor.size}` : '',
@@ -76,10 +76,16 @@ function SponsorTile({ sponsor }) {
   ].filter(Boolean).join(' ')
 
   return (
-    <div className={classes} title={sponsor.name}>
+    <div className={classes} title={sponsor.name} aria-hidden={duplicate ? 'true' : undefined}>
       {sponsor.logo ? (
         <span className="sponsor-logo-stage">
-          <img className="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" />
+          <img
+            className="sponsor-logo"
+            src={sponsor.logo}
+            alt={duplicate ? '' : sponsor.name}
+            loading="eager"
+            decoding="async"
+          />
         </span>
       ) : (
         <span className="sponsor-logo-stage sponsor-logo-stage-missing">
@@ -108,7 +114,11 @@ export default function Sponsors() {
       <div className="sponsor-wall" role="region" aria-label="Sponsor logos">
         <div className="sponsor-rail">
           {rollingSponsors.map((sponsor, index) => (
-            <SponsorTile sponsor={sponsor} key={`${sponsor.key}-${index}`} />
+            <SponsorTile
+              sponsor={sponsor}
+              duplicate={index >= SPONSORS.length}
+              key={`${sponsor.key}-${index}`}
+            />
           ))}
         </div>
       </div>
