@@ -535,9 +535,9 @@
 .sponsor-rail-track {
   display: flex;
   width: max-content;
-  gap: 18px;
-  padding: 4px 9px;
-  animation: sponsorRail 38s linear infinite;
+  gap: 16px;
+  padding: 4px 8px;
+  animation: sponsorRail 64s linear infinite;
   will-change: transform;
 }
 
@@ -547,57 +547,41 @@
 
 @keyframes sponsorRail {
   from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50% - 9px)); }
+  to   { transform: translateX(calc(-50% - 8px)); }
 }
 
 .sponsor-chip {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  width: 200px;
-  height: 64px;
-  padding: 8px 22px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+  width: 150px;
+  height: 88px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow:
+    0 8px 24px -10px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   overflow: hidden;
-  isolation: isolate;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 320ms ease;
 }
 
-.sponsor-chip::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(246, 213, 122, 0.55),
-    rgba(255, 255, 255, 0.55),
-    rgba(185, 214, 255, 0.45),
-    transparent);
-  opacity: 0.7;
-  pointer-events: none;
+.sponsor-chip:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 40px -14px rgba(246, 213, 122, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
-.sponsor-chip-tier {
-  color: rgba(247, 248, 255, 0.42);
-  font-size: 8px;
-  font-weight: 850;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-}
-
-.sponsor-chip-name {
-  margin-top: 2px;
-  font-family: "Merriweather", "Times New Roman", serif;
-  font-style: italic;
-  font-weight: 900;
-  font-size: 20px;
-  line-height: 1.05;
-  color: #fff;
+.sponsor-logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 /* ── Animation entry hooks (used by Sponsors) ────────────────────────────── */
