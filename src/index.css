@@ -584,6 +584,23 @@
   object-fit: contain;
 }
 
+.sponsor-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
+  color: #0a0d18;
+  font-family: "Merriweather", "Inter", serif;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1.18;
+  letter-spacing: 0;
+  padding: 0 4px;
+  word-break: keep-all;
+  hyphens: auto;
+}
+
 /* ── Animation entry hooks (used by Sponsors) ────────────────────────────── */
 
 .enter {
