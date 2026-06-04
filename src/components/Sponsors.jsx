@@ -25,13 +25,15 @@ import jpmorgan from '../assets/sponsors/jpmorgan.jpg'
 import amcham from '../assets/sponsors/amcham.jpg'
 import airProducts from '../assets/sponsors/air-products.jpg'
 import traxys from '../assets/sponsors/traxys.jpg'
+import sunPetroleum from '../assets/sponsors/sun-petroleum.png'
+import crowe from '../assets/sponsors/crowe.jpg'
 
 const SPONSORS = [
   { key: 'alvarez-marsal',  name: 'Alvarez & Marsal',                  logo: alvarezMarsal },
   { key: 'american-paints', name: 'American Paints',                   logo: americanPaints },
   { key: 'poytaxt',         name: 'Poytaxt Qurilish va Xizmat'                              },
   { key: 'grant-thornton',  name: 'Grant Thornton',                    logo: grantThornton },
-  { key: 'sun-petroleum',   name: 'Sun Petroleum Georgia'                                   },
+  { key: 'sun-petroleum',   name: 'Sun Petroleum Georgia',             logo: sunPetroleum },
   { key: 'asia-star-plaza', name: 'Asia Star Plaza'                                         },
   { key: 'balton',          name: 'Balton Trading',                    logo: balton },
   { key: 'aut',             name: 'American University of Technology', logo: aut },
@@ -59,7 +61,7 @@ const SPONSORS = [
   { key: 'us-beef',         name: 'US Meat Export Federation',         logo: usBeef },
   { key: 'amcham',          name: 'AmCham Uzbekistan',                 logo: amcham },
   { key: 'jpmorgan',        name: 'JPMorgan Chase',                    logo: jpmorgan },
-  { key: 'crowe',           name: 'Crowe'                                                   },
+  { key: 'crowe',           name: 'Crowe',                             logo: crowe },
 ]
 
 function SponsorTile({ sponsor }) {
