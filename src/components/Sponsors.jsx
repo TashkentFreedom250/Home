@@ -31,68 +31,67 @@ import sunPetroleum from '../assets/sponsors/sun-petroleum.png'
 import crowe from '../assets/sponsors/crowe.jpg'
 
 const SPONSORS = [
-  { key: 'alvarez-marsal',  name: 'Alvarez & Marsal',                  logo: alvarezMarsal },
-  { key: 'american-paints', name: 'American Paints',                   logo: americanPaints },
+  { key: 'alvarez-marsal',  name: 'Alvarez & Marsal',                  logo: alvarezMarsal, size: 'mark' },
+  { key: 'american-paints', name: 'American Paints',                   logo: americanPaints, size: 'wide' },
   { key: 'poytaxt',         name: 'Poytaxt Qurilish va Xizmat'                              },
-  { key: 'grant-thornton',  name: 'Grant Thornton',                    logo: grantThornton },
+  { key: 'grant-thornton',  name: 'Grant Thornton',                    logo: grantThornton, size: 'wide' },
   { key: 'sun-petroleum',   name: 'Sun Petroleum Georgia',             logo: sunPetroleum, dark: true },
   { key: 'asia-star-plaza', name: 'Asia Star Plaza'                                         },
-  { key: 'balton',          name: 'Balton Trading',                    logo: balton },
-  { key: 'aut',             name: 'American University of Technology', logo: aut },
-  { key: 'franklin',        name: 'Franklin Templeton',                logo: franklin },
-  { key: 'abbott',          name: 'Abbott',                            logo: abbott },
-  { key: 'valley',          name: 'Valley by Valmont',                 logo: valley },
+  { key: 'balton',          name: 'Balton Trading',                    logo: balton, size: 'balanced' },
+  { key: 'aut',             name: 'American University of Technology', logo: aut, size: 'wide' },
+  { key: 'franklin',        name: 'Franklin Templeton',                logo: franklin, size: 'wide' },
+  { key: 'abbott',          name: 'Abbott',                            logo: abbott, size: 'tall' },
+  { key: 'valley',          name: 'Valley by Valmont',                 logo: valley, size: 'wide' },
   { key: 'cnh',             name: 'CNH Industrial'                                          },
   { key: 'constant',        name: 'Constant Holdings'                                       },
-  { key: 'mig',             name: 'Mosaic Insurance Group',            logo: mig },
-  { key: 'traxys',          name: 'Traxys',                            logo: traxys },
-  { key: 'hyatt',           name: 'Hyatt Regency Tashkent',            logo: hyatt },
-  { key: 'hampton',         name: 'Hampton by Hilton',                 logo: hampton },
+  { key: 'mig',             name: 'Mosaic Insurance Group',            logo: mig, size: 'wide' },
+  { key: 'traxys',          name: 'Traxys',                            logo: traxys, size: 'wide' },
+  { key: 'hyatt',           name: 'Hyatt Regency Tashkent',            logo: hyatt, size: 'tall' },
+  { key: 'hampton',         name: 'Hampton by Hilton',                 logo: hampton, size: 'balanced' },
   { key: 'webster',         name: 'Webster University',                logo: webster },
-  { key: 'pg',              name: 'Procter & Gamble',                  logo: pg },
-  { key: 'honeywell',       name: 'Honeywell',                         logo: honeywell },
+  { key: 'pg',              name: 'Procter & Gamble',                  logo: pg, size: 'mark' },
+  { key: 'honeywell',       name: 'Honeywell',                         logo: honeywell, size: 'wide' },
   { key: 'google',          name: 'Google'                                                  },
   { key: 'usapeec',         name: 'USA Poultry & Egg Export Council',  logo: usapeec },
   { key: 'airproducts',     name: 'Air Products',                      logo: airProducts, dark: true },
   { key: 'wendys',          name: "Wendy's",                           logo: wendys },
   { key: 'pepsi',           name: 'Pepsi',                             logo: pepsi, dark: true },
-  { key: 'coca-cola',       name: 'Coca-Cola',                         logo: cocaCola },
+  { key: 'coca-cola',       name: 'Coca-Cola',                         logo: cocaCola, size: 'mark' },
   { key: 'papa-johns',      name: "Papa John's",                       logo: papaJohns, dark: true },
   { key: 'kfc',             name: 'KFC',                               logo: kfc, dark: true },
   { key: 'krispy',          name: 'Krispy Kreme',                      logo: krispyKreme, dark: true },
   { key: 'burger-king',     name: 'Burger King',                       logo: burgerKing },
-  { key: 'boeing',          name: 'Boeing',                            logo: boeing },
+  { key: 'boeing',          name: 'Boeing',                            logo: boeing, size: 'wide' },
   { key: 'us-beef',         name: 'US Meat Export Federation',         logo: usBeef },
   { key: 'amcham',          name: 'AmCham Uzbekistan',                 logo: amcham },
   { key: 'jpmorgan',        name: 'JPMorgan Chase',                    logo: jpmorgan, dark: true },
-  { key: 'crowe',           name: 'Crowe',                             logo: crowe },
+  { key: 'crowe',           name: 'Crowe',                             logo: crowe, size: 'wide' },
 ]
 
-function SponsorTile({ sponsor, duplicate = false }) {
+function SponsorTile({ sponsor }) {
   const classes = [
     'sponsor-chip',
+    sponsor.size ? `sponsor-chip-${sponsor.size}` : '',
     sponsor.dark ? 'sponsor-chip-dark' : '',
     sponsor.logo ? '' : 'sponsor-chip-missing',
   ].filter(Boolean).join(' ')
 
   return (
-    <div className={classes} title={sponsor.name} aria-hidden={duplicate ? 'true' : undefined}>
+    <div className={classes} title={sponsor.name}>
       {sponsor.logo ? (
-        <img className="sponsor-logo" src={sponsor.logo} alt={duplicate ? '' : sponsor.name} loading="lazy" />
+        <span className="sponsor-logo-stage">
+          <img className="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" />
+        </span>
       ) : (
-        <span className="sponsor-text">{sponsor.name}</span>
+        <span className="sponsor-logo-stage sponsor-logo-stage-missing">
+          <span className="sponsor-text">{sponsor.name}</span>
+        </span>
       )}
     </div>
   )
 }
 
 export default function Sponsors() {
-  const splitAt = Math.ceil(SPONSORS.length / 2)
-  const rows = [
-    SPONSORS.slice(0, splitAt),
-    SPONSORS.slice(splitAt),
-  ]
-
   return (
     <section className="sponsors enter d2" aria-labelledby="sponsors-heading">
       <header className="sponsors-head">
@@ -105,19 +104,9 @@ export default function Sponsors() {
         </h2>
       </header>
 
-      <div className="sponsor-wall" role="region" aria-label="Sponsor logos">
-        {rows.map((row, rowIndex) => (
-          <div className="sponsor-rail" key={rowIndex}>
-            <div className={`sponsor-rail-track sponsor-rail-track-${rowIndex + 1}`}>
-              {[...row, ...row].map((sponsor, index) => (
-                <SponsorTile
-                  sponsor={sponsor}
-                  duplicate={index >= row.length}
-                  key={`${sponsor.key}-${rowIndex}-${index}`}
-                />
-              ))}
-            </div>
-          </div>
+      <div className="sponsor-wall" role="list" aria-label="Sponsor logos">
+        {SPONSORS.map(sponsor => (
+          <SponsorTile sponsor={sponsor} key={sponsor.key} />
         ))}
       </div>
     </section>
