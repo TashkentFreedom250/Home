@@ -14,10 +14,13 @@ export default function Sponsors() {
       </header>
 
       <p className="sponsors-thanks">
-        Freedom 250 would not be possible without you. Your generosity, partnership,
-        and belief in this celebration are what bring the night to life — from the
-        first note of the anthem to the last burst of fireworks over Tashkent.
-        Thank you for standing with us.
+        Thanks to all of our sponsors, vendors, contractors, and volunteers for
+        making this event successful and to all of our guests for joining us to
+        celebrate the 250th anniversary of the United States of America's
+        Independence.
+      </p>
+      <p className="sponsors-thanks sponsors-thanks-coda">
+        Happy Birthday, America! And enjoy the rest of the week — have a good evening!
       </p>
     </section>
   )
