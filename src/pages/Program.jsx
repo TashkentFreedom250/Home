@@ -16,8 +16,8 @@ export default function Program() {
       <div className="program-hero">
         <Link to="/" className="program-back" aria-label="Back to home">← Back</Link>
         <div className="program-hero-overlay">
-          <p className="program-hero-eyebrow">An evening of</p>
-          <h1 className="program-hero-title">Program</h1>
+          <p className="program-hero-eyebrow">Program for</p>
+          <h1 className="program-hero-title">An Evening of Freedom</h1>
           <p className="program-hero-sub">June 10, 2026 · Uzexpocentre, Tashkent</p>
         </div>
       </div>
