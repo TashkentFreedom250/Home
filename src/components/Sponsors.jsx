@@ -4,12 +4,9 @@ export default function Sponsors() {
   return (
     <section className="sponsors enter d2" aria-labelledby="sponsors-heading">
       <header className="sponsors-head">
-        <span className="sponsors-eyebrow">
+        <h2 id="sponsors-heading" className="sponsors-eyebrow sponsors-eyebrow-lg">
           <img src={freedomIconGold} alt="" aria-hidden="true" />
           With gratitude
-        </span>
-        <h2 id="sponsors-heading" className="sponsors-title">
-          Thank you to our <em>sponsors</em>
         </h2>
       </header>
 

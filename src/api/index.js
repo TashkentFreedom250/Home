@@ -25,6 +25,6 @@ export function getProgramRundown() {
       { time: '9:40 PM',      item: 'DJ King Macarella — closing set.',                                                            category: 'entertainment' },
       { time: '10:00 PM',     item: 'Grand finale & farewell — DJ Mans plays guests out. Safe travels home!',                       category: 'ceremony'      },
     ],
-    note: 'Here’s what’s happening tonight. Times are approximate — come and go as you like, and enjoy the evening.',
+    note: 'Here’s what’s happening tonight. Times are approximate — enjoy every moment of the celebration!',
   }
 }
