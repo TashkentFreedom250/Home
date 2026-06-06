@@ -12,8 +12,8 @@ export function getEventDetails() {
 export function getProgramRundown() {
   return {
     blocks: [
-      { time: '6:00 PM',      item: 'Doors open — head to the food court, grab a drink, and enjoy the warm-up set with DJ Mans.', category: 'logistics'     },
-      { time: '6:00–7:30 PM', item: 'Pre-show — music, food, and festivities while guests arrive.',                                category: 'entertainment' },
+      { time: '6:30 PM',      item: 'Doors open — head to the food court, grab a drink, and enjoy the warm-up set with DJ Mans.', category: 'logistics'     },
+      { time: '6:30–7:30 PM', item: 'Pre-show — music, food, and festivities while guests arrive.',                                category: 'entertainment' },
       { time: '7:30 PM',      item: 'Official welcome & Presentation of the Colors, followed by the national anthems of Uzbekistan and the United States.', category: 'ceremony' },
       { time: '7:50 PM',      item: "Remarks and a celebratory toast from U.S. Ambassador Jonathan Henick.",                       category: 'ceremony'      },
       { time: '8:00 PM',      item: 'Live concert begins — Uzbek and American artists, back to back.',                              category: 'entertainment' },
